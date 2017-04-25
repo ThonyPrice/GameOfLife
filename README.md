@@ -12,10 +12,10 @@ https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 https://www.python.org/downloads/
 
-2.2 Clone the repository by using git: 
+2.2 Clone the repository by using git: <br />
 ```$ git clone https://gits-15.sys.kth.se/nlindq/GameOfLife.git```
 
-2.3 Run the code in the shell using: 
+2.3 Run the code in the shell using: <br />
 ```$ python3 init.py```
 
 ### 3. Testing strategy 
