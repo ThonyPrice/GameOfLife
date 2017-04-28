@@ -3,7 +3,7 @@
 
 # This file handles the backend part of what's displayed in Window.py
 # That is calculating which "cells" dies, lives on or dies each iteration
-# of the simulation. 
+# of the simulation.
 
 import Window
 
