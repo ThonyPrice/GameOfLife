@@ -6,13 +6,17 @@
 
 import tkinter as tk
 
-class Window(tk.Frame):
-    def __init__(self, board, master=None):
-        tk.Frame.__init__(self, master)
-        sz = 12 
-        # self.grid(sticky=tk.N+tk.S+tk.E+tk.W)
-        self.canvas = tk.Canvas(self, width=len(board[0])*sz + 1, 
-            height=len(board)*sz+1, highlightthickness=0, bd=0, bg='grey')
-        self.quitButton = tk.Button(self, text='Quit',
-            command=self.quit)
+class Window(tk.Canvas):
+    def __init__(self, board, sz, master=None):
+        tk.Canvas.__init__( self, 
+                            width=len(board[0])*sz+1, 
+                            height=len(board)*sz+1, 
+                            highlightthickness=0, 
+                            bd=0, 
+                            bg='grey'
+        )
+        self.pack()
+        # self.showBoard(board, size)
+        print("---EOC---")
 
+    
