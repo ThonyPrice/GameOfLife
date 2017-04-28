@@ -14,7 +14,7 @@ class CellClass:
         if count == 3: #Dead cell with 3 live neighbours becomes alive/live cell with 3 stays alive
             self.value = 1
 
-        if count == 2 and self.value = 1: #Any live cell with two live neighbours lives on to the next generation.
+        if count == 2 and self.value == 1: #Any live cell with two live neighbours lives on to the next generation.
             self.value = 1
 
         else: #all other cases the cell dies
