@@ -8,11 +8,11 @@ import tkinter as tk
 
 class Window(tk.Canvas):
     def __init__(self, board, sz, master=None):
-        tk.Canvas.__init__( self, 
-                            width=len(board[0])*sz+1, 
-                            height=len(board)*sz+1, 
-                            highlightthickness=0, 
-                            bd=0, 
+        tk.Canvas.__init__( self,
+                            width=len(board[0])*sz+1,
+                            height=len(board)*sz+1,
+                            highlightthickness=0,
+                            bd=0,
                             bg='grey'
         )
         self.pack()
