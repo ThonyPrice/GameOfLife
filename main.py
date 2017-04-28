@@ -9,50 +9,92 @@ import Window
 from CellClass import CellClass
 
 
-def GetListNeighbourValue(x,y,board):
+def GetListNeighbourValue(row, col, board):
     ValueList = []
-    for i in range(-1,2):
-        for j in range(-1,2):
-            try:
-                ValueList.append(int(board[x+i][y+j]))
-            except IndexError:
+    if row == 0 and col == 0:
+        ValueList = [0,0,0,0]
+        # Corner case
+        for i in range(0,2):
+            for j in range(0,2):
+                ValueList.append(int(board[row+i][col+j]))
+            ValueList.append(0)
+        return ValueList[:9]
+    if row == 0 and col!=0:
+        # Skip looking up
+        ValueList = [0,0,0]
+        for i in range(0,2):
+            for j in range(-1,2):
+                try:
+                    ValueList.append(int(board[row+i][col+j]))
+                except IndexError:
                     ValueList.append(0)
-
+        return ValueList
+    if col == 0 and row != 0:
+        # Skip looking left
+        ValueList = [0]
+        for i in range(-1,2):
+            for j in range(0,2):
+                try:
+                    ValueList.append(int(board[row+i][col+j]))
+                except IndexError:
+                        ValueList.append(0)
+            ValueList.append(0)
+        return ValueList[:9]
+    else:
+        try:
+            for i in range(-1,2):
+                for j in range(-1,2):
+                    ValueList.append(int(board[row+i][col+j]))
+        except IndexError:
+                ValueList.append(0)
     return ValueList
 
 def creatClasses(board):
     ListNeighbourValue = []
     listCells = []
-    for x in range(10):
-        for y in range(10):
-            listCells.append(CellClass(int(board[x][y]), x ,y, GetListNeighbourValue(x,y,board)))
-
+    for row in range(10):
+        for col in range(10):
+            listCells.append(CellClass(int(board[row][col]), row , col,
+                GetListNeighbourValue(row, col, board)))
     return listCells
 
 def updateCells(listCells):
     for cell in listCells:
         cell.update()
 
+def updateBoard(listCells):
+    ret_val = []
+    i = 0
+    for i in range(10):
+        row = []
+        for cell in listCells[i:i+10]:
+            row.append(cell.getValue())
+        i += 10
+        ret_val.append(row)
+
+    return ret_val
 
 def main():
     size = 24
     board = [
-        [0,0,0,0,0,0,0,0,0,0,0],
-        [0,1,1,0,0,0,0,0,0,0,0],
-        [0,1,1,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,1,0,0,0,0,0,0,0],
-        [0,0,0,1,0,0,1,1,1,0,0],
-        [0,0,0,1,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,1,1,0],
-        [0,0,0,0,0,0,0,0,1,1,0],
-        [0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,1,1,0,0,0,0,0,0,0],
+        [0,1,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,1,0,0,0,0,0,0],
+        [0,0,0,1,0,0,1,1,1,0],
+        [0,0,0,1,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,1,1],
+        [0,0,0,0,0,0,0,0,1,1],
     ]
     listCells = creatClasses(board)
-    win = Window.Window(board)
+    win = Window.Window(board, size)
     win.mainloop()
     updateCells(listCells)
+    newBoard = updateBoard(listCells)
+    print(newBoard)
+    print("---EOF---")
 
 
 
