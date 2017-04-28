@@ -41,12 +41,12 @@ def GetListNeighbourValue(row, col, board):
             ValueList.append(0)
         return ValueList[:9]
     else:
-        try:
-            for i in range(-1,2):
-                for j in range(-1,2):
+        for i in range(-1,2):
+            for j in range(-1,2):
+                try:
                     ValueList.append(int(board[row+i][col+j]))
-        except IndexError:
-                ValueList.append(0)
+                except IndexError:
+                    ValueList.append(0)
     return ValueList
 
 def creatClasses(board):
