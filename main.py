@@ -64,10 +64,10 @@ def updateCells(listCells):
 def updateBoard(listCells):
     ret_val = []
     i = 0
-    for i in range(10):
+    for rows in range(10):
         row = []
         for cell in listCells[i:i+10]:
-            row.append(cell.getValue())
+            row.append(cell.value)
         i += 10
         ret_val.append(row)
 
@@ -77,24 +77,25 @@ def main():
     size = 24
     board = [
         [0,0,0,0,0,0,0,0,0,0],
-        [0,1,1,0,0,0,0,0,0,0],
-        [0,1,1,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,1,0,0,0,0,0,0],
-        [0,0,0,1,0,0,1,1,1,0],
-        [0,0,0,1,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0],
-        [0,0,0,0,0,0,0,0,1,1],
-        [0,0,0,0,0,0,0,0,1,1],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,1,1,1,0,0,0],
+        [0,0,0,1,1,1,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0],
     ]
     listCells = creatClasses(board)
-    for cell in listCells:
-        print(cell)
-    win = Window.Window(board, size)
-    win.mainloop()
-    updateCells(listCells)
-    newBoard = updateBoard(listCells)
-    print(newBoard)
+
+    while True:
+        win = Window.Window(board, size)
+        win.mainloop()
+        updateCells(listCells)
+        board = updateBoard(listCells)
+        listCells = creatClasses(board)
+        # print(newBoard)
     print("---EOF---")
 
 
