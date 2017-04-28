@@ -27,6 +27,12 @@ def creatClasses(board):
         for y in range(10):
             listCells.append(CellClass(int(board[x][y]), x ,y, GetListNeighbourValue(x,y,board)))
 
+    return listCells
+
+def updateCells(listCells):
+    for cell in listCells:
+        cell.update()
+
 
 def main():
     board = [
@@ -42,9 +48,10 @@ def main():
         [0,0,0,0,0,0,0,0,1,1,0],
         [0,0,0,0,0,0,0,0,0,0,0],
     ]
-    creatClasses(board)
-    win = Window.Window()
+    listCells = creatClasses(board)
+    win = Window.Window(board)
     win.mainloop()
+    updateCells(listCells)
 
 
 
