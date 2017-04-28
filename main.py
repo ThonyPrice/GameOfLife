@@ -6,6 +6,33 @@
 # of the simulation.
 
 import Window
+from CellClass import CellClass
+
+
+def GetListNeighbourValue(x,y,board):
+    ValueList = []
+    for i in range(-1,2):
+        for j in range(-1,2):
+            try:
+                ValueList.append(int(board[x+i][y+j]))
+            except IndexError:
+                    ValueList.append(0)
+
+    return ValueList
+
+def creatClasses(board):
+    ListNeighbourValue = []
+    listCells = []
+    for x in range(10):
+        for y in range(10):
+            listCells.append(CellClass(int(board[x][y]), x ,y, GetListNeighbourValue(x,y,board)))
+
+    return listCells
+
+def updateCells(listCells):
+    for cell in listCells:
+        cell.update()
+
 
 def main():
     size = 24
@@ -22,8 +49,12 @@ def main():
         [0,0,0,0,0,0,0,0,1,1,0],
         [0,0,0,0,0,0,0,0,0,0,0],
     ]
-    win = Window.Window(board, size)
+    listCells = creatClasses(board)
+    win = Window.Window(board)
     win.mainloop()
+    updateCells(listCells)
+
+
 
 if __name__ == '__main__':
     main()
