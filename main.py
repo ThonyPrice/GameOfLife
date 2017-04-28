@@ -50,7 +50,6 @@ def GetListNeighbourValue(row, col, board):
     return ValueList
 
 def creatClasses(board):
-    ListNeighbourValue = []
     listCells = []
     for row in range(10):
         for col in range(10):
@@ -89,6 +88,8 @@ def main():
         [0,0,0,0,0,0,0,0,1,1],
     ]
     listCells = creatClasses(board)
+    for cell in listCells:
+        print(cell)
     win = Window.Window(board, size)
     win.mainloop()
     updateCells(listCells)
