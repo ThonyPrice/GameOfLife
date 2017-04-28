@@ -3,13 +3,27 @@
 
 # This file handles the backend part of what's displayed in Window.py
 # That is calculating which "cells" dies, lives on or dies each iteration
-# of the simulation. 
+# of the simulation.
 
 import Window
 
 def main():
-  win = Window.Window()
-  win.mainloop()
+    size = 24
+    board = [
+        [0,0,0,0,0,0,0,0,0,0,0],
+        [0,1,1,0,0,0,0,0,0,0,0],
+        [0,1,1,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,1,0,0,0,0,0,0,0],
+        [0,0,0,1,0,0,1,1,1,0,0],
+        [0,0,0,1,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,1,1,0],
+        [0,0,0,0,0,0,0,0,1,1,0],
+        [0,0,0,0,0,0,0,0,0,0,0],
+    ]
+    win = Window.Window(board, size)
+    win.mainloop()
 
 if __name__ == '__main__':
-  main()
+    main()
