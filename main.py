@@ -8,6 +8,7 @@
 import Window
 
 def main():
+    size = 24
     board = [
         [0,0,0,0,0,0,0,0,0,0,0],
         [0,1,1,0,0,0,0,0,0,0,0],
@@ -21,7 +22,7 @@ def main():
         [0,0,0,0,0,0,0,0,1,1,0],
         [0,0,0,0,0,0,0,0,0,0,0],
     ]
-    win = Window.Window(board)
+    win = Window.Window(board, size)
     win.mainloop()
 
 if __name__ == '__main__':
