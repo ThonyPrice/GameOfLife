@@ -16,7 +16,7 @@ https://www.python.org/downloads/
 ```$ git clone https://gits-15.sys.kth.se/nlindq/GameOfLife.git```
 
 2.3 Run the code in the shell using: <br />
-```$ python3 init.py```
+```$ python3 main.py```
 
 ### 3. Testing strategy 
 
