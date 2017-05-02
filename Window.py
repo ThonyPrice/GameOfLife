@@ -27,7 +27,7 @@ class Dropdown(tk.Frame):
         boards = [x for x in gameplans.boards.keys()]
         option = tk.OptionMenu(self, tkvar, *boards,
             command=lambda var=tkvar.get():
-                parent.parent.board.showBoard(var))
+                parent.parent.board.showBoard(gameplans.boards.get(var)))
         option.config(width=15)
         option.pack()
 
@@ -67,6 +67,9 @@ class MainApplication(tk.Frame):
         self.board.pack(side='top')
         self.controlBar.pack(side='top', fill="x")
 
+    def runGame(self):
+        return
+
 class Board(tk.Canvas):
     def __init__(self, parent, plan, sz):
         tk.Canvas.__init__(self, parent,
@@ -76,12 +79,12 @@ class Board(tk.Canvas):
             bd=0,
             bg='grey'
         )
+        startboard = gameplans.blank
         self.pack()
-        # self.showBoard(plan, sz)
+        self.showBoard(startboard)
 
-    def showBoard(self, bd_name):
+    def showBoard(self, bd):
         sz = 12
-        bd = gameplans.boards.get(bd_name)
         self.delete(tk.ALL)
         cols = len(bd[0])
         rows = len(bd)
