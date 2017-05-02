@@ -10,6 +10,7 @@ import saved_boards as gameplans
 class ControlBar(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         self.dropdown = Dropdown(self)
         self.runBtn = RunBtn(self)
         self.speedSlider = SpeedSlider(self)
@@ -21,15 +22,17 @@ class ControlBar(tk.Frame):
 class Dropdown(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        tkvar = tk.StringVar(self)
-        boards = [x for x in gameplans.boards.keys()]
-        option = tk.OptionMenu(self, tkvar, *boards)
+        tkvar = tk.StringVar()
         tkvar.set('--Select board--')
+        boards = [x for x in gameplans.boards.keys()]
+        option = tk.OptionMenu(self, tkvar, *boards,
+            command=lambda var=tkvar.get():
+                parent.parent.board.showBoard(var))
         option.config(width=15)
-        option.pack(side='left')
-        tk.Button(self, text='Load board',
-            command=lambda var=gameplans.boards.get(tkvar): self.parent.parent.board.showBoard(var)).pack(side='left')
+        option.pack()
 
+    def just(self, val):
+        print("HERE", val)
 
 class RunBtn(tk.Frame):
     def __init__(self, parent):
@@ -74,9 +77,11 @@ class Board(tk.Canvas):
             bg='grey'
         )
         self.pack()
-        self.showBoard(plan, sz)
+        # self.showBoard(plan, sz)
 
-    def showBoard(self, bd, sz):
+    def showBoard(self, bd_name):
+        sz = 12
+        bd = gameplans.boards.get(bd_name)
         self.delete(tk.ALL)
         cols = len(bd[0])
         rows = len(bd)
