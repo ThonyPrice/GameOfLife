@@ -21,21 +21,15 @@ class ControlBar(tk.Frame):
 class Dropdown(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        tkvar = tk.StringVar(parent)
-        choices = self.getBoards()
+        tkvar = tk.StringVar(self)
         boards = [x for x in gameplans.boards.keys()]
         option = tk.OptionMenu(self, tkvar, *boards)
         tkvar.set('--Select board--')
         option.config(width=15)
-        option.pack()
+        option.pack(side='left')
+        tk.Button(self, text='Load board',
+            command=lambda var=gameplans.boards.get(tkvar): self.parent.parent.board.showBoard(var)).pack(side='left')
 
-    def getBoards(self):
-        # TODO: Here som files containing boards should be read
-        #   and put into this dictionary along with values.
-        test_data = {
-            'Clear', 'Glider', 'Shooter', 'Blinker', 'Ship'
-        }
-        return test_data
 
 class RunBtn(tk.Frame):
     def __init__(self, parent):
