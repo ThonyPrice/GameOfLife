@@ -5,11 +5,11 @@
 # are able to run the cellular simulation, Conway's Game of Life
 
 import tkinter as tk
+import saved_boards as gameplans
 
 class ControlBar(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        # self.pack()
         self.dropdown = Dropdown(self)
         self.runBtn = RunBtn(self)
         self.speedSlider = SpeedSlider(self)
@@ -23,8 +23,9 @@ class Dropdown(tk.Frame):
         tk.Frame.__init__(self, parent)
         tkvar = tk.StringVar(parent)
         choices = self.getBoards()
-        option = tk.OptionMenu(self, tkvar, *choices)
-        tkvar.set('Select board')
+        boards = [x for x in gameplans.boards.keys()]
+        option = tk.OptionMenu(self, tkvar, *boards)
+        tkvar.set('--Select board--')
         option.config(width=15)
         option.pack()
 
@@ -58,26 +59,13 @@ class SpeedSlider(tk.Frame):
         scale.pack(side='left')
 
 class MainApplication(tk.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, cell_size):
         tk.Frame.__init__(self, parent)
         self.pack()
         tk.Label(self, text="MAIN APP").pack()
         self.controlBar = ControlBar(self)
 
-        test_board = [
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,1,1,1,0,0,0],
-            [0,0,0,1,1,1,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0],
-        ]
-
-        self.board = Board(self, test_board, 24)
+        self.board = Board(self, gameplans.boards.get('Pulsar'), cell_size)
 
         self.board.pack(side='top')
         self.controlBar.pack(side='top', fill="x")
