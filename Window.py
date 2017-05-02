@@ -6,6 +6,8 @@
 
 import tkinter as tk
 import saved_boards as gameplans
+import CellClass
+import time
 
 class ControlBar(tk.Frame):
     def __init__(self, parent):
@@ -31,9 +33,6 @@ class Dropdown(tk.Frame):
         option.config(width=15)
         option.pack()
 
-    def just(self, val):
-        print("HERE", val)
-
 class RunBtn(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -45,7 +44,8 @@ class RunBtn(tk.Frame):
         self.btn.pack()
 
     def run(self):
-        self.btn.config(bg='green')
+        print("Hej")
+        parent.parent.runGame()
 
 class SpeedSlider(tk.Frame):
     def __init__(self, parent):
@@ -68,7 +68,84 @@ class MainApplication(tk.Frame):
         self.controlBar.pack(side='top', fill="x")
 
     def runGame(self):
-        return
+        listOfCells = self.createClasses(self.board.plan)
+        while True:
+            self.board.showBoard(self.board.plan)
+            self.updateCells(listOfCells)
+            self.board.plan = updateBoard(listCells)
+            listOfCells = self.creatClasses(self.board.plan)
+            time.sleep(1)
+
+    def createClasses(self):
+        listCells = []
+        for row in range(10):
+            for col in range(10):
+                listCells.append(CellClass(int(board[row][col]), row , col,
+                    self.GetListNeighbourValue(row, col, board)))
+        return listCells
+
+    def GetListNeighbourValue(self, row, col, board):
+        ValueList = []
+        if row == 0 and col == 0:
+            ValueList = [0,0,0,0]
+            # Corner case
+            for i in range(0,2):
+                for j in range(0,2):
+                    ValueList.append(int(board[row+i][col+j]))
+                ValueList.append(0)
+            return ValueList[:9]
+        if row == 0 and col!=0:
+            # Skip looking up
+            ValueList = [0,0,0]
+            for i in range(0,2):
+                for j in range(-1,2):
+                    try:
+                        ValueList.append(int(board[row+i][col+j]))
+                    except IndexError:
+                        ValueList.append(0)
+            return ValueList
+        if col == 0 and row != 0:
+            # Skip looking left
+            ValueList = [0]
+            for i in range(-1,2):
+                for j in range(0,2):
+                    try:
+                        ValueList.append(int(board[row+i][col+j]))
+                    except IndexError:
+                            ValueList.append(0)
+                ValueList.append(0)
+            return ValueList[:9]
+        else:
+            for i in range(-1,2):
+                for j in range(-1,2):
+                    try:
+                        ValueList.append(int(board[row+i][col+j]))
+                    except IndexError:
+                        ValueList.append(0)
+        return ValueList
+
+    def updateCells(self, listCells):
+        for cell in listCells:
+            cell.update()
+
+    def updateBoard(self, listCells):
+        ret_val = []
+        i = 0
+        for rows in range(10):
+            row = []
+            for cell in listCells[i:i+10]:
+                row.append(cell.value)
+            i += 10
+            ret_val.append(row)
+        return ret_val
+
+def creatClasses(board):
+    listCells = []
+    for row in range(10):
+        for col in range(10):
+            listCells.append(CellClass(int(board[row][col]), row , col,
+                GetListNeighbourValue(row, col, board)))
+    return listCells
 
 class Board(tk.Canvas):
     def __init__(self, parent, plan, sz):
@@ -79,12 +156,14 @@ class Board(tk.Canvas):
             bd=0,
             bg='grey'
         )
+        self.plan = None
         startboard = gameplans.blank
         self.pack()
         self.showBoard(startboard)
 
     def showBoard(self, bd):
         sz = 12
+        self.plan = bd
         self.delete(tk.ALL)
         cols = len(bd[0])
         rows = len(bd)
