@@ -36,16 +36,16 @@ class Dropdown(tk.Frame):
 class RunBtn(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         self.btn = tk.Button(
             self,
-            text = 'Run',
+            text = 'Step',
             command = lambda: self.run()
         )
         self.btn.pack()
 
     def run(self):
-        print("Hej")
-        parent.parent.runGame()
+        self.parent.parent.runGame()
 
 class SpeedSlider(tk.Frame):
     def __init__(self, parent):
@@ -62,29 +62,30 @@ class MainApplication(tk.Frame):
         tk.Label(self, text="MAIN APP").pack()
         self.controlBar = ControlBar(self)
 
-        self.board = Board(self, gameplans.boards.get('Pulsar'), cell_size)
+        self.board = Board(self, cell_size)
 
         self.board.pack(side='top')
         self.controlBar.pack(side='top', fill="x")
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
-        while True:
-            self.board.showBoard(self.board.plan)
-            self.updateCells(listOfCells)
-            self.board.plan = updateBoard(listCells)
-            listOfCells = self.creatClasses(self.board.plan)
-            time.sleep(1)
+        # while True:
+        self.updateCells(listOfCells)
+        plan = self.updateBoard(listOfCells)
+        listOfCells = self.createClasses(plan)
+        self.board.showBoard(plan)
+        print("Iteration..")
+            # time.sleep(3)
 
-    def createClasses(self):
+    def createClasses(self, board):
         listCells = []
-        for row in range(10):
-            for col in range(10):
-                listCells.append(CellClass(int(board[row][col]), row , col,
-                    self.GetListNeighbourValue(row, col, board)))
+        for row in range(len(board)):
+            for col in range(len(board[0])):
+                listCells.append(CellClass.CellClass(int(board[row][col]), row , col,
+                    self.getListNeighbourValue(row, col, board)))
         return listCells
 
-    def GetListNeighbourValue(self, row, col, board):
+    def getListNeighbourValue(self, row, col, board):
         ValueList = []
         if row == 0 and col == 0:
             ValueList = [0,0,0,0]
@@ -131,34 +132,26 @@ class MainApplication(tk.Frame):
     def updateBoard(self, listCells):
         ret_val = []
         i = 0
-        for rows in range(10):
+        for rows in range(30):
             row = []
-            for cell in listCells[i:i+10]:
+            for cell in listCells[i:i+30]:
                 row.append(cell.value)
-            i += 10
+            i += 30
             ret_val.append(row)
         return ret_val
 
-def creatClasses(board):
-    listCells = []
-    for row in range(10):
-        for col in range(10):
-            listCells.append(CellClass(int(board[row][col]), row , col,
-                GetListNeighbourValue(row, col, board)))
-    return listCells
-
 class Board(tk.Canvas):
-    def __init__(self, parent, plan, sz):
+    def __init__(self, parent, sz):
         tk.Canvas.__init__(self, parent,
-            width=len(plan[0])*sz+1,
-            height=len(plan)*sz+1,
+            width=len(gameplans.blank[0])*sz+1,
+            height=len(gameplans.blank)*sz+1,
             highlightthickness=0,
             bd=0,
             bg='grey'
         )
-        self.plan = None
+        self.plan = gameplans.blank
         startboard = gameplans.blank
-        self.pack()
+        # self.pack()
         self.showBoard(startboard)
 
     def showBoard(self, bd):
