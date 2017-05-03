@@ -1,3 +1,6 @@
+
+# --- This file is outdated. Use main2.py instead! ---
+
 # Authors: Thony Price, Niklas Lindqvist
 # Last revision: 2017-04-28
 
