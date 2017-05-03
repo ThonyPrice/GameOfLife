@@ -9,6 +9,7 @@ import saved_boards as gameplans
 import CellClass
 import time
 
+# ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -21,6 +22,7 @@ class ControlBar(tk.Frame):
         self.speedSlider.pack(side='left')
         self.runBtn.pack(side='left')
 
+# The dropdown shows gameplans that the user can load into interface
 class Dropdown(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -33,6 +35,8 @@ class Dropdown(tk.Frame):
         option.config(width=15)
         option.pack()
 
+# Run simulation by clicking this button
+# TODO: User should also be able to paus the simulation from here too.
 class RunBtn(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -47,6 +51,7 @@ class RunBtn(tk.Frame):
     def run(self):
         self.parent.parent.runGame()
 
+# Let user decide on simulation speed.
 class SpeedSlider(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
@@ -55,6 +60,8 @@ class SpeedSlider(tk.Frame):
         scale.set(1)
         scale.pack(side='left')
 
+# Main class, this acts as a container for all other sub-frames in
+#   tkinter. from here the steps of simulation are calculated as well.
 class MainApplication(tk.Frame):
     def __init__(self, parent, cell_size):
         tk.Frame.__init__(self, parent)
@@ -142,6 +149,7 @@ class MainApplication(tk.Frame):
             ret_val.append(row)
         return ret_val
 
+# This class handles the visualization of the visualization of the game.
 class Board(tk.Canvas):
     def __init__(self, parent, sz):
         tk.Canvas.__init__(self, parent,
