@@ -84,7 +84,7 @@ class MainApplication(tk.Frame):
             self.board.showBoard(plan)
             self.root.update()
             # self.root.after(1000, clock)
-            time.sleep(0.5)
+            time.sleep(0.2)
 
     def createClasses(self, board):
         listCells = []
