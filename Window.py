@@ -56,9 +56,9 @@ class SpeedSlider(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         tk.Label(self, text='Generations per second:').pack(side='left')
-        scale = tk.Scale(self, from_=1, to=20, orient='horizontal')
-        scale.set(1)
-        scale.pack(side='left')
+        self.scale = tk.Scale(self, from_=1, to=20, orient='horizontal')
+        self.scale.set(1)
+        self.scale.pack(side='left')
 
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
@@ -67,9 +67,7 @@ class MainApplication(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.root = parent
         self.pack()
-        tk.Label(self, text="MAIN APP").pack()
         self.controlBar = ControlBar(self)
-
         self.board = Board(self, cell_size)
 
         self.board.pack(side='top')
@@ -83,8 +81,9 @@ class MainApplication(tk.Frame):
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
-            # self.root.after(1000, clock)
-            time.sleep(0.2)
+            # self.root.after(1000, clock
+            wait_time = 1/(self.controlBar.speedSlider.scale.get())
+            time.sleep(wait_time)
 
     def createClasses(self, board):
         listCells = []
