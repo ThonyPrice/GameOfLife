@@ -58,6 +58,7 @@ class SpeedSlider(tk.Frame):
 class MainApplication(tk.Frame):
     def __init__(self, parent, cell_size):
         tk.Frame.__init__(self, parent)
+        self.root = parent
         self.pack()
         tk.Label(self, text="MAIN APP").pack()
         self.controlBar = ControlBar(self)
@@ -69,13 +70,14 @@ class MainApplication(tk.Frame):
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
-        # while True:
-        self.updateCells(listOfCells)
-        plan = self.updateBoard(listOfCells)
-        listOfCells = self.createClasses(plan)
-        self.board.showBoard(plan)
-        print("Iteration..")
-            # time.sleep(3)
+        while True:
+            self.updateCells(listOfCells)
+            plan = self.updateBoard(listOfCells)
+            listOfCells = self.createClasses(plan)
+            self.board.showBoard(plan)
+            self.root.update()
+            # self.root.after(1000, clock)
+            time.sleep(0.5)
 
     def createClasses(self, board):
         listCells = []
