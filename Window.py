@@ -12,7 +12,7 @@ import time
 # ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent)
+        tk.tkk.Frame.__init__(self, parent, style='RoundedFrame')
         self.parent = parent
         self.dropdown = Dropdown(self)
         self.btns = Btns(self)
