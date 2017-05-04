@@ -80,6 +80,14 @@ class SpeedSlider(tk.Frame):
         self.scale.set(1)
         self.scale.pack(side='left')
 
+class Info(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent)
+        head = tk.Label(self, text='About this game')
+        head.config(font=("Courier", 16))
+        head.pack()
+
+
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
 class MainApplication(tk.Frame):
@@ -89,7 +97,9 @@ class MainApplication(tk.Frame):
         self.pack()
         self.controlBar = ControlBar(self)
         self.board = Board(self, cell_size)
+        self.info = Info(self)
 
+        self.info.pack(side='right', fill='x')
         self.board.pack(side='top')
         self.controlBar.pack(side='top', fill="x", pady=10, expand=1)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
