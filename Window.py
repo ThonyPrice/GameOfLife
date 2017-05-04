@@ -12,7 +12,7 @@ import time
 # ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
     def __init__(self, parent):
-        tk.Frame.__init__(self, parent, bg='#c8c8c8')
+        tk.Frame.__init__(self, parent)
         self.parent = parent
         self.dropdown = Dropdown(self)
         self.btns = Btns(self)
@@ -90,7 +90,10 @@ class MainApplication(tk.Frame):
         self.board = Board(self, cell_size)
 
         self.board.pack(side='top')
-        self.controlBar.pack(side='top', fill="x")
+        self.controlBar.pack(side='top', fill="x", pady=10)
+        text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
+        text.config(bg='#1b1b1b', fg="white").pack(side='bottom')
+        
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
