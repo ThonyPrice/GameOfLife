@@ -96,17 +96,12 @@ class MainApplication(tk.Frame):
         listOfCells = self.createClasses(self.board.plan)
         row_sz = len(self.board.plan[0])
         col_sz = len(self.board.plan)
-<<<<<<< HEAD
         while self.controlBar.btns.state:
-=======
-        while True:
->>>>>>> 3b6d7e32a3d141127c0881d6975688e98aa0b765
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
-            # self.root.after(1000, clock
             wait_time = 1/(self.controlBar.speedSlider.scale.get())
             time.sleep(wait_time)
 
