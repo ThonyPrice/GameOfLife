@@ -83,7 +83,7 @@ class SpeedSlider(tk.Frame):
 #   tkinter. from here the steps of simulation are calculated as well.
 class MainApplication(tk.Frame):
     def __init__(self, parent, cell_size):
-        tk.Frame.__init__(self, parent)
+        tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=10)
         self.root = parent
         self.pack()
         self.controlBar = ControlBar(self)
