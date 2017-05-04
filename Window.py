@@ -37,6 +37,7 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
+        self.parent.btns.state = False
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
 
@@ -92,7 +93,8 @@ class MainApplication(tk.Frame):
         self.board.pack(side='top')
         self.controlBar.pack(side='top', fill="x", pady=10, expand=1)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
-        text.config(bg='#1b1b1b', fg="white").pack(side='right')
+        text.config(bg='#1b1b1b', fg="white")
+        text.pack(side='right')
 
 
     def runGame(self):
