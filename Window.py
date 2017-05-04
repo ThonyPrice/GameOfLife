@@ -86,7 +86,18 @@ class Info(tk.Frame):
         head = tk.Label(self, text='About this game')
         head.config(font=("Courier", 16))
         head.pack()
-
+        text = tk.Label(self,
+            text=   'Each grid in the cell represents a cell in one of two \n\
+                    possible states, alive or dead. Every cell interacts with \n\
+                    its eight neighbours and at each step in time, the following \n\
+                    transitions occur: \n\
+- Any live cell with fewer than two live neighbours dies, as if caused by underpopulation. \
+- Any live cell with two or three live neighbours lives on to the next generation. \
+- Any live cell with more than three live neighbours dies, as if by overpopulation. \
+- Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction. \
+'        )
+        text.config(font=("Courier", 12))
+        text.pack()
 
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
@@ -99,13 +110,12 @@ class MainApplication(tk.Frame):
         self.board = Board(self, cell_size)
         self.info = Info(self)
 
-        self.info.pack(side='right', fill='x')
-        self.board.pack(side='top')
-        self.controlBar.pack(side='top', fill="x", pady=10, expand=1)
+        self.controlBar.pack(side='bottom', fill='x', pady=10)
+        self.board.pack(side='left', fill='both', padx= 5, expand=False)
+        self.info.pack(side='right', fill='both', padx= 5, expand=True)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
         text.config(bg='#1b1b1b', fg="white")
-        text.pack(side='right')
-
+        text.pack(side='bottom', anchor='e')
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
