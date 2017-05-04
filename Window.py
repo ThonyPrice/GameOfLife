@@ -75,10 +75,13 @@ class MainApplication(tk.Frame):
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
-        row_sz = len(self.board.plan)
+        row_sz = len(self.board.plan[0])
+        col_sz = len(self.board.plan)
+        print("ROW", row_sz)
+        print("COL", col_sz)
         while True:
             self.updateCells(listOfCells)
-            plan = self.updateBoard(listOfCells, row_sz)
+            plan = self.updateBoard(listOfCells, row_sz, col_sz)
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
@@ -138,10 +141,10 @@ class MainApplication(tk.Frame):
         for cell in listCells:
             cell.update()
 
-    def updateBoard(self, listCells, row_sz):
+    def updateBoard(self, listCells, row_sz, col_sz):
         ret_val = []
         i = 0
-        for rows in row_sz:
+        for rows in range(col_sz):
             row = []
             for cell in listCells[i:i+row_sz]:
                 row.append(cell.value)
