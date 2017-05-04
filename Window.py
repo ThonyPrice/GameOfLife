@@ -77,8 +77,6 @@ class MainApplication(tk.Frame):
         listOfCells = self.createClasses(self.board.plan)
         row_sz = len(self.board.plan[0])
         col_sz = len(self.board.plan)
-        print("ROW", row_sz)
-        print("COL", col_sz)
         while True:
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
@@ -162,13 +160,21 @@ class Board(tk.Canvas):
             bd=0,
             bg='grey'
         )
+        self.sz = sz
         self.plan = gameplans.blank
         startboard = gameplans.blank
-        # self.pack()
         self.showBoard(startboard)
 
+    def resizeCanvas(self, bd):
+        self.config(
+            width=len(bd[0]) * self.sz + 1,
+            height=len(bd) * self.sz + 1
+        )
+        print("tried resize...")
+
     def showBoard(self, bd):
-        sz = 12
+        self.resizeCanvas(bd)
+        sz = self.sz
         self.plan = bd
         self.delete(tk.ALL)
         cols = len(bd[0])
