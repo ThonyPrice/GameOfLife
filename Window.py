@@ -26,14 +26,19 @@ class ControlBar(tk.Frame):
 class Dropdown(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         tkvar = tk.StringVar()
         tkvar.set('--Select board--')
         boards = [x for x in gameplans.boards.keys()]
         option = tk.OptionMenu(self, tkvar, *boards,
             command=lambda var=tkvar.get():
-                parent.parent.board.showBoard(gameplans.boards.get(var)))
+                self.resizeAndStart(gameplans.boards.get(var)))
         option.config(width=15)
         option.pack()
+
+    def resizeAndStart(self, bd):
+        self.parent.parent.board.resizeCanvas(bd)
+        self.parent.parent.board.showBoard(bd)
 
 # Run simulation by clicking this button
 # TODO: User should also be able to paus the simulation from here too.
@@ -170,10 +175,9 @@ class Board(tk.Canvas):
             width=len(bd[0]) * self.sz + 1,
             height=len(bd) * self.sz + 1
         )
-        print("tried resize...")
+        print("tried resize")
 
     def showBoard(self, bd):
-        self.resizeCanvas(bd)
         sz = self.sz
         self.plan = bd
         self.delete(tk.ALL)
