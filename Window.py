@@ -90,10 +90,10 @@ class MainApplication(tk.Frame):
         self.board = Board(self, cell_size)
 
         self.board.pack(side='top')
-        self.controlBar.pack(side='top', fill="x", pady=10)
+        self.controlBar.pack(side='top', fill="x", pady=10, expand=1)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
-        text.config(bg='#1b1b1b', fg="white").pack(side='bottom')
-        
+        text.config(bg='#1b1b1b', fg="white").pack(side='right')
+
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
