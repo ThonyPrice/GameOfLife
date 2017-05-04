@@ -26,14 +26,19 @@ class ControlBar(tk.Frame):
 class Dropdown(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
+        self.parent = parent
         tkvar = tk.StringVar()
         tkvar.set('--Select board--')
         boards = [x for x in gameplans.boards.keys()]
         option = tk.OptionMenu(self, tkvar, *boards,
             command=lambda var=tkvar.get():
-                parent.parent.board.showBoard(gameplans.boards.get(var)))
+                self.resizeAndStart(gameplans.boards.get(var)))
         option.config(width=15)
         option.pack()
+
+    def resizeAndStart(self, bd):
+        self.parent.parent.board.resizeCanvas(bd)
+        self.parent.parent.board.showBoard(bd)
 
 # Run simulation by clicking this button
 # TODO: User should also be able to paus the simulation from here too.
@@ -75,9 +80,11 @@ class MainApplication(tk.Frame):
 
     def runGame(self):
         listOfCells = self.createClasses(self.board.plan)
+        row_sz = len(self.board.plan[0])
+        col_sz = len(self.board.plan)
         while True:
             self.updateCells(listOfCells)
-            plan = self.updateBoard(listOfCells)
+            plan = self.updateBoard(listOfCells, row_sz, col_sz)
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
@@ -137,14 +144,14 @@ class MainApplication(tk.Frame):
         for cell in listCells:
             cell.update()
 
-    def updateBoard(self, listCells):
+    def updateBoard(self, listCells, row_sz, col_sz):
         ret_val = []
         i = 0
-        for rows in range(30):
+        for rows in range(col_sz):
             row = []
-            for cell in listCells[i:i+30]:
+            for cell in listCells[i:i+row_sz]:
                 row.append(cell.value)
-            i += 30
+            i += row_sz
             ret_val.append(row)
         return ret_val
 
@@ -158,13 +165,20 @@ class Board(tk.Canvas):
             bd=0,
             bg='grey'
         )
+        self.sz = sz
         self.plan = gameplans.blank
         startboard = gameplans.blank
-        # self.pack()
         self.showBoard(startboard)
 
+    def resizeCanvas(self, bd):
+        self.config(
+            width=len(bd[0]) * self.sz + 1,
+            height=len(bd) * self.sz + 1
+        )
+        print("tried resize")
+
     def showBoard(self, bd):
-        sz = 12
+        sz = self.sz
         self.plan = bd
         self.delete(tk.ALL)
         cols = len(bd[0])
