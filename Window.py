@@ -38,8 +38,14 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
+        tmp = sum([x for xs in bd for x in xs])
+        self.parent.parent.genInfo.alive_lbl.configure(
+            text='Population: %s' % str(tmp)
+        )
         tmp = self.parent.parent.genInfo.gens = 0
-        self.parent.parent.genInfo.gen_lbl.configure(text='Generations: %s' % str(tmp))
+        self.parent.parent.genInfo.gen_lbl.configure(
+            text='Generations: %s' % str(tmp)
+        )
         self.parent.btns.state = False
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
@@ -162,6 +168,9 @@ class MainApplication(tk.Frame):
         ol_plan = self.board.plan
         while self.controlBar.btns.state:
             self.genInfo.alive = sum([x.getValue() for x in listOfCells])
+            self.genInfo.alive_lbl.configure(
+            text='Population: %s' % str(self.genInfo.alive)
+            )
             if self.genInfo.alive == 0:
                 break
             self.updateCells(listOfCells)
@@ -171,7 +180,8 @@ class MainApplication(tk.Frame):
             ol_plan = plan
             self.genInfo.gens += 1
             self.genInfo.gen_lbl.configure(
-                text='Generations: %s' % str(self.genInfo.gens))
+                text='Generations: %s' % str(self.genInfo.gens)
+                )
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
