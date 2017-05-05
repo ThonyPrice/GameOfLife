@@ -8,6 +8,7 @@ import tkinter as tk
 import saved_boards as gameplans
 import CellClass
 import time
+import webbrowser
 
 # ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
@@ -105,6 +106,14 @@ self organization may arise. For more on the topic: \
 ')
         text.config(font=("Courier", 12))
         text.pack(anchor='w')
+        link = tk.Label(self, text='Wikipedia\n', fg='blue', cursor='hand2')
+        link.config(font=("Courier", 12))
+        link.pack()
+        link.bind("<Button-1>", self.browse)
+
+    def browse(self, event=None):
+        webbrowser.open_new(r"https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life")
+
 
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
