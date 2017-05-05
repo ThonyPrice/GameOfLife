@@ -91,7 +91,7 @@ class Info(tk.Frame):
 'Each grid in the cell represents a cell in one of two\n\
 possible states, alive or dead. Every cell interacts\n\
 with its eight neighbours and at each step in time,\n\
-the following transitions occur:\n\
+the following transitions occur:\n\n\
     # Any live cell with fewer than two live\n\
         neighbours dies, as if caused by underpopulation.\n\
     # Any live cell with two or three live neighbours\n\
@@ -99,7 +99,9 @@ the following transitions occur:\n\
     # Any live cell with more than three live\n\
         neighbours dies, as if by overpopulation.\n\
     # Any dead cell with exactly three live neighbours\n\
-        becomes a live cell, as if by reproduction.\n\
+        becomes a live cell, as if by reproduction.\n\n\
+By these simple rules complex patterns as well as\n\
+self organization may arise. For more on the topic: \
 ')
         text.config(font=("Courier", 12))
         text.pack(anchor='w')
