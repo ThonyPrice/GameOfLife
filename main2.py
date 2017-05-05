@@ -6,7 +6,7 @@ def main():
     root = tk.Tk()
     root.title("Conway's Game of Life")
     root.configure(bg='#1b1b1b')
-    w, h = 800, 480
+    w, h = 960, 480
     ws, hs = root.winfo_screenwidth(), root.winfo_screenheight()
     x, y = (ws/2) - (w/2), (hs/2) - (h/2)
     root.geometry('%dx%d+%d+%d' % (w, h, x, y))
