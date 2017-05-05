@@ -38,6 +38,8 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
+        tmp = self.parent.parent.gens = 0
+        self.parent.parent.gen_lbl.configure(text='Generations: %s' % str(tmp))
         self.parent.btns.state = False
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
