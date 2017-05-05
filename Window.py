@@ -122,15 +122,15 @@ class MainApplication(tk.Frame):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=10)
         self.root = parent
         self.pack()
-        self.gens = 5
+        self.gens = 0
         self.controlBar = ControlBar(self)
         self.board = Board(self, cell_size)
         self.info = Info(self)
-        gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
-        gen_lbl.config(bg='#1b1b1b', fg="white")
+        self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
+        self.gen_lbl.config(bg='#1b1b1b', fg="white")
 
         self.controlBar.pack(side='bottom', fill='x', pady=7)
-        gen_lbl.pack(side='bottom', anchor='w', pady=5)
+        self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
         self.board.pack(side='left', fill='x', padx= 5, expand=False)
         self.info.pack(side='right', fill='both', padx= 5, expand=True)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
@@ -144,6 +144,8 @@ class MainApplication(tk.Frame):
         while self.controlBar.btns.state:
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
+            self.gens += 1
+            self.gen_lbl.configure(text='Generations: %s' % str(self.gens))
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
