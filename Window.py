@@ -83,21 +83,26 @@ class SpeedSlider(tk.Frame):
 class Info(tk.Frame):
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
-        head = tk.Label(self, text='About this game')
+        head = tk.Label(self, text='\nAbout this game\n')
         head.config(font=("Courier", 16))
         head.pack()
         text = tk.Label(self,
-            text=   'Each grid in the cell represents a cell in one of two \n\
-                    possible states, alive or dead. Every cell interacts with \n\
-                    its eight neighbours and at each step in time, the following \n\
-                    transitions occur: \n\
-- Any live cell with fewer than two live neighbours dies, as if caused by underpopulation. \
-- Any live cell with two or three live neighbours lives on to the next generation. \
-- Any live cell with more than three live neighbours dies, as if by overpopulation. \
-- Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction. \
-'        )
+            text =
+'Each grid in the cell represents a cell in one of two\n\
+possible states, alive or dead. Every cell interacts\n\
+with its eight neighbours and at each step in time,\n\
+the following transitions occur:\n\
+    # Any live cell with fewer than two live\n\
+        neighbours dies, as if caused by underpopulation.\n\
+    # Any live cell with two or three live neighbours\n\
+        lives on to the next generation.\n\
+    # Any live cell with more than three live\n\
+        neighbours dies, as if by overpopulation.\n\
+    # Any dead cell with exactly three live neighbours\n\
+        becomes a live cell, as if by reproduction.\n\
+')
         text.config(font=("Courier", 12))
-        text.pack()
+        text.pack(anchor='w')
 
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
