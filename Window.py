@@ -145,7 +145,8 @@ class MainApplication(tk.Frame):
         col_sz = len(self.board.plan)
         while self.controlBar.btns.state:
             alive = sum([x.getValue() for x in listOfCells])
-            print("Alive:", alive)
+            if alive == 0:
+                break
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
             self.gens += 1
