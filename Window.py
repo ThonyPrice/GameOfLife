@@ -127,7 +127,7 @@ class MainApplication(tk.Frame):
         self.info = Info(self)
 
         self.controlBar.pack(side='bottom', fill='x', pady=10)
-        self.board.pack(side='left', fill='both', padx= 5, expand=False)
+        self.board.pack(side='left', fill='x', padx= 5, expand=False)
         self.info.pack(side='right', fill='both', padx= 5, expand=True)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
         text.config(bg='#1b1b1b', fg="white")
