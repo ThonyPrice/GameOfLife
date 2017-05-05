@@ -143,12 +143,16 @@ class MainApplication(tk.Frame):
         listOfCells = self.createClasses(self.board.plan)
         row_sz = len(self.board.plan[0])
         col_sz = len(self.board.plan)
+        ol_plan = self.board.plan
         while self.controlBar.btns.state:
             alive = sum([x.getValue() for x in listOfCells])
             if alive == 0:
                 break
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
+            if plan == ol_plan:
+                break
+            ol_plan = plan
             self.gens += 1
             self.gen_lbl.configure(text='Generations: %s' % str(self.gens))
             listOfCells = self.createClasses(plan)
