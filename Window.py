@@ -38,8 +38,8 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
-        tmp = self.parent.parent.gens = 0
-        self.parent.parent.gen_lbl.configure(text='Generations: %s' % str(tmp))
+        tmp = self.parent.parent.genInfo.gens = 0
+        self.parent.parent.genInfo.gen_lbl.configure(text='Generations: %s' % str(tmp))
         self.parent.btns.state = False
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
@@ -116,6 +116,17 @@ self organization may arise. For more on the topic: \
     def browse(self, event=None):
         webbrowser.open_new(r"https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life")
 
+class GenereationInfo(tk.Frame):
+    def __init__(self, parent):
+        tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=2)
+        self.gens = 0
+        self.alive = 0
+        self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
+        self.gen_lbl.config(bg='#1b1b1b', fg="white")
+        self.alive_lbl = tk.Label(self, text='Population: %s' % str(self.alive))
+        self.alive_lbl.config(bg='#1b1b1b', fg="white", padx=3)
+        self.gen_lbl.pack(side='left')
+        self.alive_lbl.pack(side='left', padx=30)
 
 # Main class, this acts as a container for all other sub-frames in
 #   tkinter. from here the steps of simulation are calculated as well.
@@ -124,15 +135,20 @@ class MainApplication(tk.Frame):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=10)
         self.root = parent
         self.pack()
-        self.gens = 0
         self.controlBar = ControlBar(self)
         self.board = Board(self, cell_size)
         self.info = Info(self)
-        self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
-        self.gen_lbl.config(bg='#1b1b1b', fg="white")
+        self.genInfo = GenereationInfo(self)
+        # self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
+        # self.gen_lbl.config(bg='#1b1b1b', fg="white")
+        # self.alive_lbl = tk.Label(self, text='Population: %s' % str(self.alive))
+        # self.alive_lbl.config(bg='#1b1b1b', fg="white", padx=3)
+
 
         self.controlBar.pack(side='bottom', fill='x', pady=7)
-        self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
+        self.genInfo.pack(side='bottom', anchor='w', pady=5)
+        # self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
+        # self.alive_lbl.pack(side='right', pady=5)
         self.board.pack(side='left', fill='x', padx= 5, expand=False)
         self.info.pack(side='right', fill='both', padx= 5, expand=True)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
@@ -145,16 +161,17 @@ class MainApplication(tk.Frame):
         col_sz = len(self.board.plan)
         ol_plan = self.board.plan
         while self.controlBar.btns.state:
-            alive = sum([x.getValue() for x in listOfCells])
-            if alive == 0:
+            self.genInfo.alive = sum([x.getValue() for x in listOfCells])
+            if self.genInfo.alive == 0:
                 break
             self.updateCells(listOfCells)
             plan = self.updateBoard(listOfCells, row_sz, col_sz)
             if plan == ol_plan:
                 break
             ol_plan = plan
-            self.gens += 1
-            self.gen_lbl.configure(text='Generations: %s' % str(self.gens))
+            self.genInfo.gens += 1
+            self.genInfo.gen_lbl.configure(
+                text='Generations: %s' % str(self.genInfo.gens))
             listOfCells = self.createClasses(plan)
             self.board.showBoard(plan)
             self.root.update()
