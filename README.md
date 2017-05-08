@@ -9,6 +9,10 @@ The developed program will be a desktop application. The project will be written
 
 In the GUI, the user will be able to read about the Conway's Game of life. The user may also run a simulation of a predetermined Game of Life board. The user can see how the board changes over generations and is also available to change board at any given time. Lastly, the user will also be able to change the speed of the simulation. 
 
+![alt text](https://gits-15.sys.kth.se/storage/user/1795/files/f2ccd68c-33ed-11e7-9431-64af81842d93)
+
+Figure 1: GUI of Game of Life (8 May 2017).  
+
 ### 2. How to run the program:
 
 2.1 To begin with install python 3.X from Pythons webpage:
