@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 """This file executes testing on the application Game of Life"""
 
+__author__ = "Thony Price, Niklas Lindqvist"
+__version__ = "1.0.1"
+__email__ = "thonyp@kth.se, nlindq@kth.se"
+
 import unittest
 import tkinter as tk
 import test_data as test
 import Window as win
 import CellClass as cc
 
-obj.__doc__
-__author__ = "Thony Price, Niklas Lindqvist"
-__version__ = "1.0.1"
-__email__ = "thonyp@kth.se, nlindq@kth.se"
-
 class TestStringMethods(unittest.TestCase):
+    """This class contains all unittest to be executed"""
 
     def test_updateCells(self):
         """ Test that a given board updates correctly"""
