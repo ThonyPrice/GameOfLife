@@ -1,14 +1,21 @@
-# Unittesting
+#!/usr/bin/env python
+"""This file executes testing on the application Game of Life"""
 
 import unittest
-import test_data as test
 import tkinter as tk
+import test_data as test
 import Window as win
 import CellClass as cc
+
+obj.__doc__
+__author__ = "Thony Price, Niklas Lindqvist"
+__version__ = "1.0.1"
+__email__ = "thonyp@kth.se, nlindq@kth.se"
 
 class TestStringMethods(unittest.TestCase):
 
     def test_updateCells(self):
+        """ Test that a given board updates correctly"""
         cell_sz = 1
         root = tk.Tk()
         row_sz = len(test.board1[0])
