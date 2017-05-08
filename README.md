@@ -7,6 +7,8 @@ https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
 The developed program will be a desktop application. The project will be written in 100% Python using the library tkinter for the GUI.
 
+In the GUI, the user will be able to read about the Conway's Game of life. The user may also run a simulation of a predetermined Game of Life board. The user can see how the board changes over generations and is also available to change board at any given time. Lastly, the user will also be able to change the speed of the simulation. 
+
 ### 2. How to run the program:
 
 2.1 To begin with install python 3.X from Pythons webpage:
