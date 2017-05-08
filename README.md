@@ -30,3 +30,6 @@ https://www.python.org/downloads/
 3.1 The program will be tested properly when close to final version.
 
 3.2 The user tests should be conducted by formulating tasks that are mandatory for a functional minimal viable product. These tasks should then be controlled to be easily performed by an average user.
+
+3.3 A unit test, using pythons unittest, will be used to confirm the correctness and reliability of the core features of the program such as update cells and alive counter.
+ 
