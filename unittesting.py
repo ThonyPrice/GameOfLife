@@ -1,23 +1,25 @@
 # Unittesting
 
 import unittest
+import test_data as test
+import tkinter as tk
 import Window as win
 import CellClass as cc
 
 class TestStringMethods(unittest.TestCase):
 
     def test_updateCells(self):
-        test_board = [
-            [0,0,0,0,0],
-            [0,0,1,0,0],
-            [0,0,1,0,0],
-            [0,0,1,0,0],
-            [0,0,0,0,0],
-        ]
-        listOfCells = cc.createClasses(test_board)
-        new_board = updateCells(listOfCells)
-        print(new_board)
-        self.assertEqual('foo'.upper(), 'FOO')
+        cell_sz = 1
+        root = tk.Tk()
+        row_sz = len(test.board1[0])
+        col_sz = len(test.board1)
+        test_app = win.MainApplication(root, cell_sz)
+        listOfCells = test_app.createClasses(test.board1)
+        test_app.updateCells(listOfCells)
+        self.assertEqual(
+            test_app.updateBoard(listOfCells, row_sz, col_sz),
+            test.board1_update1
+        )
 
     def test_isupper(self):
         self.assertTrue('FOO'.isupper())
