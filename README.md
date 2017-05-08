@@ -2,9 +2,10 @@
 #### A project in ProjINDA 2017
 
 ### 1. Project Description:
-In this project we will with the help of Python create a simulation of Conway's Game of life
-For more information see: 
+In this project we will with the help of Python create a simulation of Conway's Game of life. For more information on Game of Life, see:
 https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
+
+The developed program will be a desktop application. The project will be written in 100% Python using the library tkinter for the GUI.
 
 ### 2. How to run the program:
 
@@ -16,10 +17,10 @@ https://www.python.org/downloads/
 ```$ git clone https://gits-15.sys.kth.se/nlindq/GameOfLife.git```
 
 2.3 Run the code in the shell using: <br />
-```$ python3 main.py```
+```$ python3 main2.py```
 
-### 3. Testing strategy 
+### 3. Testing strategy
 
-3.1 The source code will been tested using trial and error.
+3.1 The program will be tested properly when close to final version.
 
-
+3.2 The user tests should be conducted by formulating tasks that are mandatory for a functional minimal viable product. These tasks should then be controlled to be easily performed by an average user.
