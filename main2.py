@@ -5,7 +5,8 @@ def main():
     # Set up tkinter window
     root = tk.Tk()
     root.title("Conway's Game of Life")
-    w, h = 800, 480
+    root.configure(bg='#1b1b1b')
+    w, h = 960, 480
     ws, hs = root.winfo_screenwidth(), root.winfo_screenheight()
     x, y = (ws/2) - (w/2), (hs/2) - (h/2)
     root.geometry('%dx%d+%d+%d' % (w, h, x, y))
