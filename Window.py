@@ -265,12 +265,27 @@ class Board(tk.Canvas):
         self.plan = gameplans.blank
         startboard = gameplans.blank
         self.showBoard(startboard)
+        self.bind("<Button-1>", self.switchCell)
 
     def resizeCanvas(self, bd):
         self.config(
             width=len(bd[0]) * self.sz + 1,
             height=len(bd) * self.sz + 1
         )
+
+    def switchCell(self, event=None):
+        """Switch the value of a cell on click"""
+        cx = event.x
+        cy = event.y
+        bx = cx//self.sz
+        by = cy//self.sz
+        board = self.plan
+        if bx < len(board[0]) and by < len(board):
+            if board[by][bx] == 0:
+                board[by][bx] = 1
+            else:
+                board[by][bx] = 0
+            self.showBoard(board)
 
     def showBoard(self, bd):
         sz = self.sz
