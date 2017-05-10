@@ -275,7 +275,17 @@ class Board(tk.Canvas):
 
     def switchCell(self, event=None):
         """Switch the value of a cell on click"""
-        print("Click-test works")
+        cx = event.x
+        cy = event.y
+        bx = cx//self.sz
+        by = cy//self.sz
+        board = self.plan
+        if bx < len(board[0]) and by < len(board):
+            if board[by][bx] == 0:
+                board[by][bx] = 1
+            else:
+                board[by][bx] = 0
+            self.showBoard(board)
 
     def showBoard(self, bd):
         sz = self.sz
