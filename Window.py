@@ -59,24 +59,24 @@ class Btns(tk.Frame):
         self.parent = parent
         self.state = False
         self.run_btn = tk.Button(
-            self,
+            self, width = 7,
             text = 'Run',
             command = lambda: self.run()
         ).pack(side='left')
         self.stop_btn = tk.Button(
-            self,
+            self, width = 7,
             text = 'Stop',
             command = lambda: self.stop()
         ).pack(side='left')
         self.mute_btn = tk.Button(
-            self,
+            self, width = 7,
             text = 'Mute Music',
             command = lambda: self.mute()
         )
         self.mute_btn.pack(side='left')
 
         self.quit_btn = tk.Button(
-            self,
+            self, width = 7,
             text = 'Quit',
             command = lambda: self.quit()
         ).pack(side='left')
