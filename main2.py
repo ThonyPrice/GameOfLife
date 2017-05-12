@@ -1,5 +1,10 @@
 import tkinter as tk
 import Window as App
+from pygame import mixer
+
+mixer.init()
+mixer.music.load('SleepySunflower.wav')
+mixer.music.play()
 
 def main():
     # Set up tkinter window
