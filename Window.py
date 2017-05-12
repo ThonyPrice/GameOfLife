@@ -70,9 +70,11 @@ class Btns(tk.Frame):
         ).pack(side='left')
         self.mute_btn = tk.Button(
             self,
-            text = 'Mute',
+            text = 'Mute Music',
             command = lambda: self.mute()
-        ).pack(side='left')
+        )
+        self.mute_btn.pack(side='left')
+
         self.quit_btn = tk.Button(
             self,
             text = 'Quit',
@@ -87,8 +89,15 @@ class Btns(tk.Frame):
         self.state = False
 
     def mute(self):
-        mixer.music.pause()
-        
+
+        if self.mute_btn["text"] == "Mute Music":
+            mixer.music.pause()
+            self.mute_btn["text"] = "Play Music"
+        else:
+            mixer.music.unpause()
+            self.mute_btn["text"] = "Mute Music"
+
+
 
 
 # Let user decide on simulation speed.
