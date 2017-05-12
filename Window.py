@@ -9,6 +9,7 @@ import saved_boards as gameplans
 import CellClass
 import time
 import webbrowser
+from pygame import mixer
 
 # ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
@@ -67,6 +68,11 @@ class Btns(tk.Frame):
             text = 'Stop',
             command = lambda: self.stop()
         ).pack(side='left')
+        self.mute_btn = tk.Button(
+            self,
+            text = 'Mute',
+            command = lambda: self.mute()
+        ).pack(side='left')
         self.quit_btn = tk.Button(
             self,
             text = 'Quit',
@@ -79,6 +85,11 @@ class Btns(tk.Frame):
 
     def stop(self):
         self.state = False
+
+    def mute(self):
+        mixer.music.pause()
+        
+
 
 # Let user decide on simulation speed.
 class SpeedSlider(tk.Frame):
