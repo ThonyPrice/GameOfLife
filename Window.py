@@ -43,6 +43,7 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
+        """initalize and start boards with the selected board from dropdown"""
         tmp = sum([x for xs in bd for x in xs])
         self.parent.parent.genInfo.alive_lbl.configure(
             text='Population: %s' % str(tmp)
@@ -55,23 +56,25 @@ class Dropdown(tk.Frame):
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
 
-# Run simulation by clicking this button
-# TODO: User should also be able to paus the simulation from here too.
 class Btns(tk.Frame):
+    """Container for all buttons"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.state = False
+        """Create button that runs the simulation"""
         self.run_btn = tk.Button(
             self,
             text = 'Run',
             command = lambda: self.run()
         ).pack(side='left')
+        """Create button that stops it"""
         self.stop_btn = tk.Button(
             self,
             text = 'Stop',
             command = lambda: self.stop()
         ).pack(side='left')
+        """Create button that quits program"""
         self.quit_btn = tk.Button(
             self,
             text = 'Quit',
@@ -79,6 +82,7 @@ class Btns(tk.Frame):
         ).pack(side='left')
 
     def run(self):
+        """Run the game"""
         self.state = True
         self.parent.parent.runGame()
 
