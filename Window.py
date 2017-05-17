@@ -71,17 +71,14 @@ class Btns(tk.Frame):
             text = 'Stop',
             command = lambda: self.stop()
         ).pack(side='left')
-<<<<<<< HEAD
+        """Create button that mutes music"""
         self.mute_btn = tk.Button(
             self, width = 7,
             text = 'Mute Music',
             command = lambda: self.mute()
         )
         self.mute_btn.pack(side='left')
-
-=======
         """Create button that quits program"""
->>>>>>> commentCode
         self.quit_btn = tk.Button(
             self, width = 7,
             text = 'Quit',
@@ -96,9 +93,7 @@ class Btns(tk.Frame):
     def stop(self):
         self.state = False
 
-<<<<<<< HEAD
     def mute(self):
-
         if self.mute_btn["text"] == "Mute Music":
             mixer.music.pause()
             self.mute_btn["text"] = "Play Music"
@@ -106,12 +101,6 @@ class Btns(tk.Frame):
             mixer.music.unpause()
             self.mute_btn["text"] = "Mute Music"
 
-
-
-
-# Let user decide on simulation speed.
-=======
->>>>>>> commentCode
 class SpeedSlider(tk.Frame):
     """Add a slider that controls the simulation speed"""
     def __init__(self, parent):
