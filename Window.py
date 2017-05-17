@@ -142,9 +142,12 @@ class GenereationInfo(tk.Frame):
         self.gen_lbl.pack(side='left')
         self.alive_lbl.pack(side='left', padx=30)
 
-# Main class, this acts as a container for all other sub-frames in
-#   tkinter. from here the steps of simulation are calculated as well.
 class MainApplication(tk.Frame):
+    """
+    Frame initialized with root. This frame will contains all other frames
+    as subframes. Each other window will have this as parent allowing
+    operations in subframes affect sibling frames
+    """
     def __init__(self, parent, cell_size):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=10)
         self.root = parent
@@ -153,12 +156,8 @@ class MainApplication(tk.Frame):
         self.board = Board(self, cell_size)
         self.info = Info(self)
         self.genInfo = GenereationInfo(self)
-        # self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
-        # self.gen_lbl.config(bg='#1b1b1b', fg="white")
-        # self.alive_lbl = tk.Label(self, text='Population: %s' % str(self.alive))
-        # self.alive_lbl.config(bg='#1b1b1b', fg="white", padx=3)
 
-
+        # Pack containers in frame
         self.controlBar.pack(side='bottom', fill='x', pady=7)
         self.genInfo.pack(side='bottom', anchor='w', pady=5)
         # self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
