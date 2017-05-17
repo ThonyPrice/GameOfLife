@@ -200,6 +200,7 @@ class MainApplication(tk.Frame):
             time.sleep(wait_time)
 
     def createClasses(self, board):
+        """init a list of cellObjects"""
         listCells = []
         for row in range(len(board)):
             for col in range(len(board[0])):
@@ -208,6 +209,7 @@ class MainApplication(tk.Frame):
         return listCells
 
     def getListNeighbourValue(self, row, col, board):
+        """Create a list with all 8 values of neighbours of a cell"""
         ValueList = []
         if row == 0 and col == 0:
             ValueList = [0,0,0,0]
@@ -262,8 +264,8 @@ class MainApplication(tk.Frame):
             ret_val.append(row)
         return ret_val
 
-# This class handles the visualization of the visualization of the game.
 class Board(tk.Canvas):
+    """This class inits a canvas on which the game plan is displayed"""
     def __init__(self, parent, sz):
         tk.Canvas.__init__(self, parent,
             width=len(gameplans.blank[0])*sz+1,
@@ -279,6 +281,7 @@ class Board(tk.Canvas):
         self.bind("<Button-1>", self.switchCell)
 
     def resizeCanvas(self, bd):
+        """Resize canvas to a given board"""
         self.config(
             width=len(bd[0]) * self.sz + 1,
             height=len(bd) * self.sz + 1
@@ -299,6 +302,7 @@ class Board(tk.Canvas):
             self.showBoard(board)
 
     def showBoard(self, bd):
+        """Given all values of bd, display the boards on canvas"""
         sz = self.sz
         self.plan = bd
         self.delete(tk.ALL)
