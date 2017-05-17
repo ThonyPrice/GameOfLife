@@ -1,8 +1,9 @@
-# Authors: Thony Price, Niklas Lindqvist
-# Last revision: 2017-04-28
+#!/usr/bin/env python
+"""This file is responsible for the GUI in the game"""
 
-# This file contains a class that initializes a tkinter window which
-# are able to run the cellular simulation, Conway's Game of Life
+__author__ = "Thony Price, Niklas Lindqvist"
+__version__ = "1.0.1"
+__email__ = "thonyp@kth.se, nlindq@kth.se"
 
 import tkinter as tk
 import saved_boards as gameplans
