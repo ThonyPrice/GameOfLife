@@ -24,12 +24,8 @@ class ControlBar(tk.Frame):
         self.speedSlider.pack(side='left')
         self.btns.pack(side='left')
 
-# The dropdown shows gameplans that the user can load into interface
 class Dropdown(tk.Frame):
-    """
-    Displays a dropdown with boards that the user can load
-    into the board
-    """
+    """Displays a dropdown with boards that the user can load into the board"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
@@ -90,7 +86,7 @@ class Btns(tk.Frame):
         self.state = False
 
 class SpeedSlider(tk.Frame):
-"""Add a slider that controls the simulation speed"""
+    """Add a slider that controls the simulation speed"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         tk.Label(self, text='Generations per second:').pack(side='left')
@@ -99,6 +95,7 @@ class SpeedSlider(tk.Frame):
         self.scale.pack(side='left')
 
 class Info(tk.Frame):
+    """Add a frame in window that contains information about the game"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         head = tk.Label(self, text='\nAbout this game\n')
@@ -129,9 +126,11 @@ self organization may arise. For more on the topic: \
         link.bind("<Button-1>", self.browse)
 
     def browse(self, event=None):
+        """Direct user to hyperlink"""
         webbrowser.open_new(r"https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life")
 
 class GenereationInfo(tk.Frame):
+    """Labels with information of generations and population"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=2)
         self.gens = 0
