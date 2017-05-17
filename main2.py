@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""This file contains test boards for the file unittesting.py"""
+"""Main file for GameOfLIfe. Execute to run program"""
 
 __author__ = "Thony Price, Niklas Lindqvist"
 __version__ = "1.0.1"
