@@ -169,6 +169,10 @@ class MainApplication(tk.Frame):
         text.pack(side='bottom', anchor='e')
 
     def runGame(self):
+        """
+        Initalize list with cells. While no interrupts occurs,
+        the board updates continously in the while-loop below
+        """
         listOfCells = self.createClasses(self.board.plan)
         row_sz = len(self.board.plan[0])
         col_sz = len(self.board.plan)
