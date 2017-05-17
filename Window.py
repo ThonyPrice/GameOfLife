@@ -11,8 +11,8 @@ import CellClass
 import time
 import webbrowser
 
-# ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
+    """Container for buttons and sliders"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
@@ -26,6 +26,10 @@ class ControlBar(tk.Frame):
 
 # The dropdown shows gameplans that the user can load into interface
 class Dropdown(tk.Frame):
+    """
+    Displays a dropdown with boards that the user can load
+    into the board
+    """
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
