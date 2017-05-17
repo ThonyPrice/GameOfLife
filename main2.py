@@ -1,8 +1,15 @@
+#!/usr/bin/env python
+"""This file contains test boards for the file unittesting.py"""
+
+__author__ = "Thony Price, Niklas Lindqvist"
+__version__ = "1.0.1"
+__email__ = "thonyp@kth.se, nlindq@kth.se"
+
 import tkinter as tk
 import Window as App
 
 def main():
-    # Set up tkinter window
+    """"Set up the Window for game and initalize it"""
     root = tk.Tk()
     root.title("Conway's Game of Life")
     root.configure(bg='#1b1b1b')
@@ -14,8 +21,6 @@ def main():
     cell_size = 12
     app = App.MainApplication(root, cell_size)
     app.mainloop()
-
-
 
 if __name__ == '__main__':
     main()
