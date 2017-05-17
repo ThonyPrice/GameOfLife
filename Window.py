@@ -89,8 +89,8 @@ class Btns(tk.Frame):
     def stop(self):
         self.state = False
 
-# Let user decide on simulation speed.
 class SpeedSlider(tk.Frame):
+"""Add a slider that controls the simulation speed"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         tk.Label(self, text='Generations per second:').pack(side='left')
