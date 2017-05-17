@@ -1,8 +1,9 @@
-# Authors: Thony Price, Niklas Lindqvist
-# Last revision: 2017-04-28
+#!/usr/bin/env python
+"""This file is responsible for the GUI in the game"""
 
-# This file contains a class that initializes a tkinter window which
-# are able to run the cellular simulation, Conway's Game of Life
+__author__ = "Thony Price, Niklas Lindqvist"
+__version__ = "1.0.1"
+__email__ = "thonyp@kth.se, nlindq@kth.se"
 
 import tkinter as tk
 import saved_boards as gameplans
@@ -11,8 +12,8 @@ import time
 import webbrowser
 from pygame import mixer
 
-# ControlBar acts as a container for Dropdown, run btn and speed slider.
 class ControlBar(tk.Frame):
+    """Container for buttons and sliders"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
@@ -24,8 +25,8 @@ class ControlBar(tk.Frame):
         self.speedSlider.pack(side='left')
         self.btns.pack(side='left')
 
-# The dropdown shows gameplans that the user can load into interface
 class Dropdown(tk.Frame):
+    """Displays a dropdown with boards that the user can load into the board"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
@@ -39,6 +40,7 @@ class Dropdown(tk.Frame):
         option.pack()
 
     def resizeAndStart(self, bd):
+        """initalize and start boards with the selected board from dropdown"""
         tmp = sum([x for xs in bd for x in xs])
         self.parent.parent.genInfo.alive_lbl.configure(
             text='Population: %s' % str(tmp)
@@ -51,23 +53,25 @@ class Dropdown(tk.Frame):
         self.parent.parent.board.resizeCanvas(bd)
         self.parent.parent.board.showBoard(bd)
 
-# Run simulation by clicking this button
-# TODO: User should also be able to paus the simulation from here too.
 class Btns(tk.Frame):
+    """Container for all buttons"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         self.parent = parent
         self.state = False
+        """Create button that runs the simulation"""
         self.run_btn = tk.Button(
             self, width = 7,
             text = 'Run',
             command = lambda: self.run()
         ).pack(side='left')
+        """Create button that stops it"""
         self.stop_btn = tk.Button(
             self, width = 7,
             text = 'Stop',
             command = lambda: self.stop()
         ).pack(side='left')
+<<<<<<< HEAD
         self.mute_btn = tk.Button(
             self, width = 7,
             text = 'Mute Music',
@@ -75,6 +79,9 @@ class Btns(tk.Frame):
         )
         self.mute_btn.pack(side='left')
 
+=======
+        """Create button that quits program"""
+>>>>>>> commentCode
         self.quit_btn = tk.Button(
             self, width = 7,
             text = 'Quit',
@@ -82,12 +89,14 @@ class Btns(tk.Frame):
         ).pack(side='left')
 
     def run(self):
+        """Run the game"""
         self.state = True
         self.parent.parent.runGame()
 
     def stop(self):
         self.state = False
 
+<<<<<<< HEAD
     def mute(self):
 
         if self.mute_btn["text"] == "Mute Music":
@@ -101,7 +110,10 @@ class Btns(tk.Frame):
 
 
 # Let user decide on simulation speed.
+=======
+>>>>>>> commentCode
 class SpeedSlider(tk.Frame):
+    """Add a slider that controls the simulation speed"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         tk.Label(self, text='Generations per second:').pack(side='left')
@@ -110,6 +122,7 @@ class SpeedSlider(tk.Frame):
         self.scale.pack(side='left')
 
 class Info(tk.Frame):
+    """Add a frame in window that contains information about the game"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent)
         head = tk.Label(self, text='\nAbout this game\n')
@@ -140,9 +153,11 @@ self organization may arise. For more on the topic: \
         link.bind("<Button-1>", self.browse)
 
     def browse(self, event=None):
+        """Direct user to hyperlink"""
         webbrowser.open_new(r"https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life")
 
 class GenereationInfo(tk.Frame):
+    """Labels with information of generations and population"""
     def __init__(self, parent):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=2)
         self.gens = 0
@@ -154,9 +169,12 @@ class GenereationInfo(tk.Frame):
         self.gen_lbl.pack(side='left')
         self.alive_lbl.pack(side='left', padx=30)
 
-# Main class, this acts as a container for all other sub-frames in
-#   tkinter. from here the steps of simulation are calculated as well.
 class MainApplication(tk.Frame):
+    """
+    Frame initialized with root. This frame will contains all other frames
+    as subframes. Each other window will have this as parent allowing
+    operations in subframes affect sibling frames
+    """
     def __init__(self, parent, cell_size):
         tk.Frame.__init__(self, parent, bg='#1b1b1b', bd=10)
         self.root = parent
@@ -165,12 +183,8 @@ class MainApplication(tk.Frame):
         self.board = Board(self, cell_size)
         self.info = Info(self)
         self.genInfo = GenereationInfo(self)
-        # self.gen_lbl = tk.Label(self, text='Generations: %s' % str(self.gens))
-        # self.gen_lbl.config(bg='#1b1b1b', fg="white")
-        # self.alive_lbl = tk.Label(self, text='Population: %s' % str(self.alive))
-        # self.alive_lbl.config(bg='#1b1b1b', fg="white", padx=3)
 
-
+        # Pack containers in frame
         self.controlBar.pack(side='bottom', fill='x', pady=7)
         self.genInfo.pack(side='bottom', anchor='w', pady=5)
         # self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
@@ -182,6 +196,10 @@ class MainApplication(tk.Frame):
         text.pack(side='bottom', anchor='e')
 
     def runGame(self):
+        """
+        Initalize list with cells. While no interrupts occurs,
+        the board updates continously in the while-loop below
+        """
         listOfCells = self.createClasses(self.board.plan)
         row_sz = len(self.board.plan[0])
         col_sz = len(self.board.plan)
@@ -209,6 +227,7 @@ class MainApplication(tk.Frame):
             time.sleep(wait_time)
 
     def createClasses(self, board):
+        """init a list of cellObjects"""
         listCells = []
         for row in range(len(board)):
             for col in range(len(board[0])):
@@ -217,6 +236,7 @@ class MainApplication(tk.Frame):
         return listCells
 
     def getListNeighbourValue(self, row, col, board):
+        """Create a list with all 8 values of neighbours of a cell"""
         ValueList = []
         if row == 0 and col == 0:
             ValueList = [0,0,0,0]
@@ -271,8 +291,8 @@ class MainApplication(tk.Frame):
             ret_val.append(row)
         return ret_val
 
-# This class handles the visualization of the visualization of the game.
 class Board(tk.Canvas):
+    """This class inits a canvas on which the game plan is displayed"""
     def __init__(self, parent, sz):
         tk.Canvas.__init__(self, parent,
             width=len(gameplans.blank[0])*sz+1,
@@ -288,6 +308,7 @@ class Board(tk.Canvas):
         self.bind("<Button-1>", self.switchCell)
 
     def resizeCanvas(self, bd):
+        """Resize canvas to a given board"""
         self.config(
             width=len(bd[0]) * self.sz + 1,
             height=len(bd) * self.sz + 1
@@ -308,6 +329,7 @@ class Board(tk.Canvas):
             self.showBoard(board)
 
     def showBoard(self, bd):
+        """Given all values of bd, display the boards on canvas"""
         sz = self.sz
         self.plan = bd
         self.delete(tk.ALL)
