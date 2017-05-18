@@ -174,7 +174,7 @@ class MainApplication(tk.Frame):
         self.genInfo = GenereationInfo(self)
 
         # Pack containers in frame
-        self.controlBar.pack(side='bottom', fill='x', pady=7)
+        self.controlBar.pack(side='bottom', fill='x', pady=0)
         self.genInfo.pack(side='bottom', anchor='w', pady=5)
         # self.gen_lbl.pack(side='bottom', anchor='w', pady=5)
         # self.alive_lbl.pack(side='right', pady=5)
@@ -182,7 +182,7 @@ class MainApplication(tk.Frame):
         self.info.pack(side='right', fill='both', padx= 5, expand=True)
         text = tk.Label(text='Made by Thony Price and Niklas Linqvist for DD1349')
         text.config(bg='#1b1b1b', fg="white")
-        text.pack(side='bottom', anchor='e')
+        text.pack(side='bottom', anchor='e', padx= (20,20), pady = (0,9))
 
     def runGame(self):
         """
