@@ -22,16 +22,18 @@ https://www.python.org/downloads/
 2.2 Install Pygame:
 
 For Mac:
+
 https://pygame.org/wiki/macintosh
 
 For Windows:
+
 http://www.pygame.org/download.shtml
 
 2.2 Clone the repository by using git: <br />
 ```$ git clone https://gits-15.sys.kth.se/nlindq/GameOfLife.git```
 
 2.3 Run the code in the shell using: <br />
-```$ python3 main2.py```
+```$ python3 main.py```
 
 ### 3. Testing strategy
 
